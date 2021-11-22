@@ -50,11 +50,11 @@ export default async function handler(
 
   if (req.method === 'GET') {
     const { after } = req.query;
-
     const queryOptions = {
       size: 6,
       ...(after && { after: query.Ref(query.Collection('images'), after) }),
     };
+
 
     return client
       .query<ImagesQueryResponse>(
@@ -71,6 +71,7 @@ export default async function handler(
           ...item.data,
           ts: item.ts,
           id: item.ref.id,
+
         }));
 
         return res.json({
